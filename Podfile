@@ -6,6 +6,7 @@ target 'ExCustomView' do
   
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'RxGesture'
   pod 'SnapKit'
   pod 'Then'
 end

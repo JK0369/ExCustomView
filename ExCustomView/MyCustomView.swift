@@ -28,23 +28,32 @@ final class MyCustomView: UIView {
   override init(frame: CGRect) {
     super.init(frame: .zero)
     
-    self.backgroundColor = .gray.withAlphaComponent(0.3)
+    self.layer.borderWidth = 1
+    self.layer.borderColor = UIColor.gray.cgColor
+    self.layer.cornerRadius = 10
     
     [self.titleLabel, self.inputInformationLabel, self.textField]
       .forEach(self.addSubview(_:))
     
     self.titleLabel.snp.makeConstraints {
-      $0.top.left.equalToSuperview()
+      $0.top.equalToSuperview()
+      $0.centerX.equalToSuperview()
     }
     self.inputInformationLabel.snp.makeConstraints {
-      $0.top.equalTo(self.titleLabel.snp.bottom).offset(16)
-      $0.left.equalToSuperview()
+      $0.top.equalTo(self.titleLabel.snp.bottom).offset(4)
+      $0.left.equalToSuperview().offset(16)
     }
     self.textField.snp.makeConstraints {
-      $0.centerY.equalTo(self.inputInformationLabel.snp.centerY)
+      $0.top.equalTo(self.titleLabel.snp.bottom)
       $0.left.equalTo(self.inputInformationLabel.snp.right).offset(8)
+      $0.bottom.equalToSuperview()
       $0.width.equalTo(140)
     }
+  }
+  
+  private var contentSize: CGSize? = nil
+  override var intrinsicContentSize: CGSize {
+    self.contentSize ?? super.intrinsicContentSize
   }
   
   @available(*, unavailable)
